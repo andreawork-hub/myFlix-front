@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "type": "pwa-chrome",
+      "type": "chrome",
       "name": "http://localhost:1234",
       "request": "launch",
       "url": "http://localhost:1234"
