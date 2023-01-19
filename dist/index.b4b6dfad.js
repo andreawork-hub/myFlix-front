@@ -27213,11 +27213,14 @@ parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 const MovieCard = ({ movie  })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        onClick: ()=>{
+            setSelectedMovie(movie);
+        },
         children: movie.title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 2,
-        columnNumber: 10
+        lineNumber: 3,
+        columnNumber: 5
     }, undefined);
 };
 _c = MovieCard;

@@ -1,3 +1,11 @@
 export const MovieCard = ({ movie }) => {
-  return <div>{movie.title}</div>;
+  return (
+    <div
+      onClick={() => {
+        setSelectedMovie(movie);
+      }}
+    >
+      {movie.title}
+    </div>
+  );
 };
