@@ -5,11 +5,7 @@ import "./index.scss";
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
-  return (
-    <div className="my-flix">
-      <h1>Hello React!</h1>
-    </div>
-  );
+  return <MainView />;
 };
 
 // Finds the root of your app
