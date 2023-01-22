@@ -4,25 +4,24 @@ import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     fetch("https://movie-api-lnmw.onrender.com/movies")
       .then((response) => response.json())
-      .then((data) => {
-        const moviesFromApi = data.docs.map((doc) => {
+      .then((movies) => {
+        console.log("data:", movies);
+        const moviesFromApi = movies.map((movie) => {
+          const { _id, ...rest } = movie;
           return {
-            id: doc.key,
-            title: doc.title,
-            image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
-            director: doc.author_name?.[0],
+            ...rest,
+            id: movie._id,
           };
         });
 
         setMovies(moviesFromApi);
       });
   }, []);
-
-  const [selectedMovie, setSelectedMovie] = useState(null);
 
   if (selectedMovie) {
     return (
@@ -42,9 +41,7 @@ export const MainView = () => {
         <MovieCard
           key={movie.id}
           movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
+          onMovieClick={() => setSelectedMovie(movie)}
         />
       ))}
     </div>
