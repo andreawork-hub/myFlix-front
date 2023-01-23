@@ -2930,11 +2930,7 @@ $RefreshReg$(_c, "MyFlixApplication");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-<<<<<<< HEAD
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./components/main-view/main-view":"4gflv","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iESsg","./index.css":"irmnC"}],"iTorj":[function(require,module,exports) {
-=======
 },{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./components/main-view/main-view":"4gflv","./index.css":"irmnC","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iESsg"}],"iTorj":[function(require,module,exports) {
->>>>>>> andreawork-hub-branch3.5
 "use strict";
 module.exports = require("8f7f653ba8846d4e");
 
@@ -27140,29 +27136,6 @@ const MainView = ()=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-<<<<<<< HEAD
-    (0, _react.useEffect)(()=>{
-        fetch("https://movie-api-lnmw.onrender.com/movies").then((response)=>response.json()).then((movies)=>{
-            console.log("data:", movies);
-            const moviesFromApi = movies.map((movie)=>{
-                const { _id , ...rest } = movie;
-                return {
-                    ...rest,
-                    id: movie._id
-                };
-            });
-            setMovies(moviesFromApi);
-        });
-    }, []);
-    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        movie: selectedMovie,
-        onBackClick: ()=>setSelectedMovie(null)
-    }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 28,
-        columnNumber: 7
-    }, undefined);
-=======
     const [user, setUser] = (0, _react.useState)(null);
     const [token, setToken] = (0, _react.useState)(null);
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -27234,16 +27207,11 @@ const MainView = ()=>{
             }, undefined)
         ]
     }, void 0, true);
->>>>>>> andreawork-hub-branch3.5
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< HEAD
-        lineNumber: 36,
-=======
         lineNumber: 76,
->>>>>>> andreawork-hub-branch3.5
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27252,28 +27220,16 @@ const MainView = ()=>{
                 onMovieClick: ()=>setSelectedMovie(movie)
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< HEAD
-                lineNumber: 41,
-=======
                 lineNumber: 81,
->>>>>>> andreawork-hub-branch3.5
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-<<<<<<< HEAD
-        lineNumber: 39,
-        columnNumber: 5
-    }, undefined);
-};
-_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
-=======
         lineNumber: 79,
         columnNumber: 5
     }, undefined);
 };
 _s(MainView, "ld1mNqbzEgxPu9ZfASjBJ7ZrUMw=");
->>>>>>> andreawork-hub-branch3.5
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -28335,10 +28291,7 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-<<<<<<< HEAD
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"iDfyF","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iESsg","react":"21dqq"}],"irmnC":[function() {},{}]},["7XeaG","5heKS","d8Dch"], "d8Dch", "parcelRequire3b30")
-=======
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"iDfyF","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iESsg"}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"iDfyF","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iESsg"}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -28590,6 +28543,5 @@ $RefreshReg$(_c, "SignupView");
   window.$RefreshSig$ = prevRefreshSig;
 }
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"iDfyF","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"iESsg"}],"irmnC":[function() {},{}]},["7XeaG","5heKS","d8Dch"], "d8Dch", "parcelRequire3b30")
->>>>>>> andreawork-hub-branch3.5
 
 //# sourceMappingURL=index.b4b6dfad.js.map
