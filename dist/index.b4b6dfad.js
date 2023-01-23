@@ -28422,7 +28422,7 @@ const SignupView = ()=>{
             Email: email,
             Birthday: birthday
         };
-        fetch("SIGNUP_URL", {
+        fetch("https://movie-api-lnmw.onrender.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

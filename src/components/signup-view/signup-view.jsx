@@ -16,7 +16,7 @@ export const SignupView = () => {
       Birthday: birthday,
     };
 
-    fetch("SIGNUP_URL", {
+    fetch("https://movie-api-lnmw.onrender.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
