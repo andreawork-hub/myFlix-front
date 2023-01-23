@@ -7,13 +7,10 @@ import { SignupView } from "../signup-view/signup-view";
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-<<<<<<< HEAD
-=======
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
->>>>>>> andreawork-hub-branch3.5
 
   useEffect(() => {
     if (!token) {
@@ -24,15 +21,6 @@ export const MainView = () => {
     })
       .then((response) => response.json())
       .then((movies) => {
-<<<<<<< HEAD
-        console.log("data:", movies);
-        const moviesFromApi = movies.map((movie) => {
-          const { _id, ...rest } = movie;
-          return {
-            ...rest,
-            id: movie._id,
-          };
-=======
         console.log(movies);
         setMovies(movies);
       });
@@ -43,15 +31,12 @@ export const MainView = () => {
               ...rest,
               id: movie._id,
               };
->>>>>>> andreawork-hub-branch3.5
         });
 
         setMovies(moviesFromApi);
       });
   }, []); */
 
-<<<<<<< HEAD
-=======
   if (!user) {
     return (
       <>
@@ -67,7 +52,6 @@ export const MainView = () => {
     );
   }
 
->>>>>>> andreawork-hub-branch3.5
   if (selectedMovie) {
     return (
       <>
