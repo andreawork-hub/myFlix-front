@@ -2,15 +2,17 @@ import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
 
 import Container from "react-bootstrap/Container";
-// Import statement to indicate that you need to bundle `./index.scss`
+
 import "./index.css";
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
   return (
-    <Container className="bg-dark">
-      <MainView className="bg-dark" />
-    </Container>
+    <div className="bg-dark text-white" style={{ minHeight: "100vh" }}>
+      <Container>
+        <MainView />
+      </Container>
+    </div>
   );
 };
 
