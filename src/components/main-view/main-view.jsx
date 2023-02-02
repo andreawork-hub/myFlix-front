@@ -3,17 +3,21 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { ProfileView } from "../profile-view/profile-view";
+import { MovieList } from "../movie-list/movie-list";
+import { AddFavorite } from "../add-favorites/add-favorites";
+import { RemoveFavorite } from "../remove-favorites/remove-favorites";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { Row, Col, Button } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
+  const [favorite, setFavorite] = useState("");
 
   useEffect(() => {
     if (!token) {
@@ -32,28 +36,36 @@ export const MainView = () => {
             description: movie.Description,
             genre: movie.Genre.Name,
             director: movie.Director.Name,
-            isFavorite: false,
           };
         });
         setMovies(moviesFromApi);
       });
   }, [token]);
-  /*((movies) => {
-        console.log(movies);
-        setMovies(movies);
-      });
-  }, [token]);
-  /*const moviesFromApi = movies.map((movie) => {
-            const { _id, ...rest } = movie;
-            return {
-              ...rest,
-              id: movie._id,
-              };
-        });
 
-        setMovies(moviesFromApi);
-      });
-  }, []); */
+  useEffect(() => {
+    const movieFavorite = JSON.parse(
+      localStorage.getItem("react-my-flix-favorite")
+    );
+    setFavorite(movieFavorite);
+  }, []);
+
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("react-my-flix-favorite", JSON.stringify(items));
+  };
+
+  const addFavoriteMovie = (movie) => {
+    const newFavoriteList = [...favorite, movie];
+    setFavorite(newFavoriteList);
+    saveToLocalStorage(newFavoriteList);
+  };
+
+  const removeFavoriteMovie = (movie) => {
+    const newFavoriteList = favorite.filter(
+      (favorite) => favorite.Id !== movie.Id
+    );
+    setFavorite(newFavoriteList);
+    saveToLocalStorage(newFavoriteList);
+  };
 
   return (
     <BrowserRouter>
@@ -131,6 +143,52 @@ export const MainView = () => {
                         <MovieCard movie={movie} />
                       </Col>
                     ))}
+                  </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <>
+                    <Col md={8}>
+                      <ProfileView />
+                    </Col>
+                  </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/movielist"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <>
+                    <div md={8} className="container-fluid movie-app">
+                      <div className="row">
+                        <MovieList
+                          movies={movies}
+                          handleFavoriteClick={addFavoriteMovie}
+                          favoriteComponent={AddFavorite}
+                        />
+                      </div>
+                      <div className="row d-flex align-items-center mt-4 mb-4">
+                        <h1>Favorites</h1>
+                      </div>
+                      <MovieList
+                        movies={favorite}
+                        handleFavoriteClick={addFavoriteMovie}
+                        favoriteComponent={RemoveFavorite}
+                      />
+                    </div>
                   </>
                 )}
               </>

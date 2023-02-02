@@ -7,7 +7,7 @@ export const MovieView = ({ movies }) => {
   const movie = movies.find((m) => m.id === movieId);
 
   return (
-    <div class="bg-dark text-white mt-5">
+    <div className="bg-dark text-white mt-5">
       <div>
         <img className="w-100 mb-3" src={movie.image} />
       </div>
