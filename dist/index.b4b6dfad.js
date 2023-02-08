@@ -27190,7 +27190,7 @@ const MainView = ()=>{
     ]);
     (0, _react.useEffect)(()=>{
         const movieFavorite = JSON.parse(localStorage.getItem("react-my-flix-favorite"));
-        if (movieFavorites) setFavorite(movieFavorite);
+        if (movieFavorite) setFavorite(movieFavorite);
     }, []);
     const saveToLocalStorage = (items)=>{
         localStorage.setItem("react-my-flix-favorite", JSON.stringify(items));

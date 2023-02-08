@@ -46,7 +46,7 @@ export const MainView = () => {
     const movieFavorite = JSON.parse(
       localStorage.getItem("react-my-flix-favorite")
     );
-    if (movieFavorites) {
+    if (movieFavorite) {
       setFavorite(movieFavorite);
     }
   }, []);
