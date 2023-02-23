@@ -1,30 +1,60 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import PropTypes from "prop-types";
+import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const MovieList = (props) => {
   const FavoriteComponent = props.favoriteComponent;
 
   return (
     <>
-      {props.movies.map((movie, index) => (
+      {props.movies.map((movie) => (
         <Card
-          key={movie.i}
-          className="h-100 bg-dark mt-5 d-flex justify-content-start m-3"
+          className="movie-card bg-dark text-white mh-100 d-flex justify-content-start m-3"
           style={{ width: "18rem" }}
+          key={movie.id}
         >
-          <Card.Img variant="top" src={movie.image} alt="movie" />
+          <Card.Img
+            className="card-image"
+            variant="top"
+            src={movie.image}
+            alt="movie"
+          />
           <Card.Body>
             <Card.Title>{movie.title}</Card.Title>
             <Card.Text>{movie.director}</Card.Text>
-            <div
-              onClick={() => props.handleFavoriteClicks(movie)}
-              className="d-flex align-items-center justify-content-center"
+          </Card.Body>
+          <Card.Footer className="mb-3 justify-content-between">
+            <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+              <Button variant="danger">Open</Button>
+            </Link>
+
+            <Button
+              variant="danger"
+              onClick={() => props.handleFavoriteClick(movie)}
             >
               <FavoriteComponent />
-            </div>
-          </Card.Body>
+            </Button>
+          </Card.Footer>
         </Card>
       ))}
     </>
   );
+};
+
+MovieList.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string,
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string,
+    }),
+  }).isRequired,
 };

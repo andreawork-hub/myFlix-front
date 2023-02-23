@@ -3,12 +3,12 @@ import React from "react";
 export const AddFavorite = () => {
   return (
     <>
-      <span className="mr-2">Add to Favorite</span>
+      <span className="mr-2"> </span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
-        fill="red"
+        fill="white"
         class="bi bi-heart-fill"
         viewBox="0 0 16 16"
       >

@@ -26,11 +26,11 @@ export const LoginView = ({ onLoggedIn }) => {
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
         } else {
-          alert("No such user");
+          alert("Account does not exist, please signup.");
         }
       })
       .catch((e) => {
-        alert("Something went wrong");
+        alert("Something went wrong, please try again.");
       });
   };
 
