@@ -1,1 +1,14 @@
+.my-Flix > .row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
 
+.movie-card {
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

@@ -1,28 +1,33 @@
-import React from "react";
+import { useParams } from "react-router";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((m) => m.id === movieId);
+
   return (
-    <div class="bg-dark text-white m-3">
+    <div className="bg-dark text-white mt-5">
       <div>
-        <img className="w-100" src={movie.ImagePath} />
+        <img className="w-100 mb-3" src={movie.image} />
       </div>
       <div>
-        <h3>{movie.Title}</h3>
+        <h1 style={{ fontWeight: "bold" }}>{movie.title}</h1>
       </div>
-      <div class="mb-4 mt-4">
-        <h5>
-          {movie.Director.Name} , {movie.Genre.Name}
-        </h5>
-        <span>{movie.Description}</span>
+      <div className="mb-5 mt-3">
+        <span>{movie.description}</span>
       </div>
-      <Button
-        onClick={onBackClick}
-        style={{ cursor: "pointer" }}
-        variant="danger"
-      >
-        Back
-      </Button>
+      <div>
+        <span style={{ fontStyle: "italic" }}>{movie.director}</span>
+      </div>
+      <div className="mb-5">
+        <span style={{ fontStyle: "italic" }}>{movie.genre}</span>
+      </div>
+      <Link to={`/`}>
+        <Button style={{ cursor: "pointer" }} variant="danger">
+          Back
+        </Button>
+      </Link>
     </div>
   );
 };
