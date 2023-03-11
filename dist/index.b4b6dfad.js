@@ -27517,8 +27517,11 @@ const MovieView = ({ movies  })=>{
                     style: {
                         fontStyle: "italic"
                     },
-                    children: movie.director
-                }, void 0, false, {
+                    children: [
+                        "Director: ",
+                        movie.director
+                    ]
+                }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 21,
                     columnNumber: 9
@@ -27534,8 +27537,11 @@ const MovieView = ({ movies  })=>{
                     style: {
                         fontStyle: "italic"
                     },
-                    children: movie.genre
-                }, void 0, false, {
+                    children: [
+                        "Genre: ",
+                        movie.genre
+                    ]
+                }, void 0, true, {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 24,
                     columnNumber: 9
@@ -46679,7 +46685,7 @@ const ProfileView = ({ user , token , onDelete  })=>{
                 window.location.reload();
             } else {
                 console.error(data);
-                alert("Update failed, try again later.");
+                alert("Profile update failed, try again later.");
             }
         } catch (error) {
             console.error(error);
@@ -46694,7 +46700,7 @@ const ProfileView = ({ user , token , onDelete  })=>{
             }
         }).then((response)=>{
             if (response.ok) {
-                alert("Your account was successfully deleted.");
+                alert("Your profile was successfully deleted.");
                 localStorage.clear();
                 window.location.reload();
             } else alert("Something went wrong, please try again.");
@@ -46786,7 +46792,7 @@ const ProfileView = ({ user , token , onDelete  })=>{
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "text-center",
+                                className: "text-left",
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                                     variant: "danger",
                                     onClick: ()=>setUpdateUser(true),

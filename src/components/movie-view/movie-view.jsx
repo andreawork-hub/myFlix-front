@@ -18,10 +18,10 @@ export const MovieView = ({ movies }) => {
         <span>{movie.description}</span>
       </div>
       <div>
-        <span style={{ fontStyle: "italic" }}>{movie.director}</span>
+        <span style={{ fontStyle: "italic" }}>Director: {movie.director}</span>
       </div>
       <div className="mb-5">
-        <span style={{ fontStyle: "italic" }}>{movie.genre}</span>
+        <span style={{ fontStyle: "italic" }}>Genre: {movie.genre}</span>
       </div>
       <Link to={`/`}>
         <Button style={{ cursor: "pointer" }} variant="danger">

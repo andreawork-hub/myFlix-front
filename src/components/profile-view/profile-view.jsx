@@ -44,7 +44,7 @@ export const ProfileView = ({ user, token, onDelete }) => {
         window.location.reload();
       } else {
         console.error(data);
-        alert("Update failed, try again later.");
+        alert("Profile update failed, try again later.");
       }
     } catch (error) {
       console.error(error);
@@ -61,7 +61,7 @@ export const ProfileView = ({ user, token, onDelete }) => {
     })
       .then((response) => {
         if (response.ok) {
-          alert("Your account was successfully deleted.");
+          alert("Your profile was successfully deleted.");
           localStorage.clear();
           window.location.reload();
         } else {
@@ -112,7 +112,7 @@ export const ProfileView = ({ user, token, onDelete }) => {
                 </ListGroup>
               </Card.Body>
               <Card.Body>
-                <div className="text-center">
+                <div className="text-left">
                   <Button variant="danger" onClick={() => setUpdateUser(true)}>
                     EDIT
                   </Button>
