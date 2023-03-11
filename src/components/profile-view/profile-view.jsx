@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-//import { UpdateForm } from "./update-user";
 import { Row, Col, Button, Card, ListGroup, Form } from "react-bootstrap";
 
 export const ProfileView = ({ user, token, onDelete }) => {
   const [updateUser, setUpdateUser] = useState(false);
-  const [username, setUsername] = useState(user.username);
-  const [password, setPassword] = useState(user.password);
-  const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(user.birthday);
+  const [username, setUsername] = useState(user.Username);
+  const [password, setPassword] = useState(user.Password);
+  const [email, setEmail] = useState(user.Email);
+  const [birthday, setBirthday] = useState(user.Birthday);
   const birthdayInputRef = useRef(null);
 
   useEffect(() => {
@@ -20,10 +19,10 @@ export const ProfileView = ({ user, token, onDelete }) => {
     event.preventDefault();
 
     const userData = {
-      username: username,
-      password: password,
-      email: email,
-      birthday: birthday,
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday,
     };
     try {
       const response = await fetch(
@@ -37,41 +36,39 @@ export const ProfileView = ({ user, token, onDelete }) => {
           },
         }
       );
-      const { success, message, data } = await response.json();
-      if (success) {
-        alert(message);
+      const data = await response.json();
+      console.log(data);
+      if (data) {
+        alert("The profile information was updated.");
         setUpdateUser(false);
+        window.location.reload();
       } else {
-        console.error(message);
-        alert("Update failed");
+        console.error(data);
+        alert("Update failed, try again later.");
       }
     } catch (error) {
       console.error(error);
     }
   };
-  ////
-  ////
-  const handleDeleteUser = async () => {
-    try {
-      const response = await fetch(
-        `https://movie-api-lnmw.onrender.com/users/${user.Username}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+
+  const handleDeleteUser = () => {
+    fetch(`https://movie-api-lnmw.onrender.com/users/${user.Username}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Your account was successfully deleted.");
+          localStorage.clear();
+          window.location.reload();
+        } else {
+          alert("Something went wrong, please try again.");
         }
-      );
-      const { success, message, data } = await response.json();
-      if (success) {
-        onDelete();
-      } else {
-        alert(message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+      })
+      .catch((error) => console.log(error));
   };
 
   const formatDate = (birthday) => {
@@ -93,31 +90,30 @@ export const ProfileView = ({ user, token, onDelete }) => {
       {!updateUser ? (
         <Row>
           <Col>
-            <Card className="bg-dark border-0" style={{ marginTop: 75 }}>
+            <Card className="bg-dark border-0">
               <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
+                <Card.Title style={{ textAlign: "center" }} className="mb-3">
                   User Information
                 </Card.Title>
-                <Card.Text></Card.Text>
                 <ListGroup className="text-start">
-                  <ListGroup.Item className="text-bg-dark">
+                  <ListGroup.Item className="text-bg-dark mb-3">
                     Username: {username}
                   </ListGroup.Item>
-                  <ListGroup.Item className="text-bg-dark">
+                  <ListGroup.Item className="text-bg-dark mb-3">
                     Password: **********
                   </ListGroup.Item>
 
-                  <ListGroup.Item className="text-bg-dark">
+                  <ListGroup.Item className="text-bg-dark mb-3">
                     Email: {email}
                   </ListGroup.Item>
-                  <ListGroup.Item className="text-bg-dark">
+                  <ListGroup.Item className="text-bg-dark mb-3">
                     Birthday: {formatDate(birthday)}
                   </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
               <Card.Body>
                 <div className="text-center">
-                  <Button variant="primary" onClick={() => setUpdateUser(true)}>
+                  <Button variant="danger" onClick={() => setUpdateUser(true)}>
                     EDIT
                   </Button>
                 </div>
@@ -128,12 +124,11 @@ export const ProfileView = ({ user, token, onDelete }) => {
       ) : (
         <Row>
           <Col>
-            <Card className="bg-dark border-0" style={{ marginTop: 75 }}>
+            <Card className="bg-dark border-0">
               <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
+                <Card.Title style={{ textAlign: "center" }} className="mb-3">
                   Profile Information
                 </Card.Title>
-                <Card.Text></Card.Text>
                 <Form onSubmit={handleUpdate}>
                   <Form.Group controlId="formUsername" className="mb-3">
                     <Form.Label>Username</Form.Label>
@@ -180,16 +175,28 @@ export const ProfileView = ({ user, token, onDelete }) => {
                       required
                     />
                   </Form.Group>
-                  <div>
-                    <Button variant="danger" type="submit">
+                  <div className="text-center">
+                    <Button
+                      variant="danger"
+                      type="submit"
+                      style={{ alignItems: "flex-end", float: "left" }}
+                    >
                       Save
                     </Button>
-                    <Button onClick={handleDeleteUser} variant="danger">
+                    <Button
+                      onClick={() => handleDeleteUser(user._id)}
+                      variant="danger"
+                      style={{ alignItems: "flex-end", float: "center" }}
+                    >
                       Delete
                     </Button>
                     <Button
                       onClick={() => setUpdateUser(false)}
                       variant="danger"
+                      style={{
+                        alignItems: "flex-end",
+                        float: "right",
+                      }}
                     >
                       Cancel
                     </Button>

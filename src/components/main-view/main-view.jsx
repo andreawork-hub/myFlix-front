@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-//import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
@@ -8,16 +7,15 @@ import { MovieList } from "../movie-list/movie-list";
 import { AddFavorite } from "../add-favorites/add-favorites";
 import { RemoveFavorite } from "../remove-favorites/remove-favorites";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const storedToken = localStorage.getItem("token");
   const [favorite, setFavorite] = useState([]);
+  const [filtered, setFiltered] = useState(movies);
 
   useEffect(() => {
     if (!token) {
@@ -43,7 +41,17 @@ export const MainView = () => {
     }
   }, [token]);
 
-  // const xyz = movies.filter((m) => m.title.toLowerCase().includes(searchValue.toLowerCase().trim())
+  const filterMovies = (e) => {
+    console.log("movies: ", movies[0]);
+    if (e.target.value !== "") {
+      const result = movies.filter((movie) =>
+        movie.title.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setFiltered(result);
+    } else {
+      setFiltered(movies);
+    }
+  };
 
   // favorite movies
   useEffect(() => {
@@ -61,7 +69,7 @@ export const MainView = () => {
 
   const addFavoriteMovie = (movie) => {
     const newFavoriteList = [...favorite, movie];
-    setFavorite(newFavoriteList);
+    setFavorite([...new Set(newFavoriteList)]);
     saveToLocalStorage(newFavoriteList);
   };
 
@@ -71,13 +79,6 @@ export const MainView = () => {
     );
     setFavorite(newFavoriteList);
     saveToLocalStorage(newFavoriteList);
-  };
-
-  // component ProfileView, onDelete
-  const clearLocalCurrentUser = () => {
-    setUsername(null);
-    setToken(null);
-    localStorage.clear();
   };
 
   return (
@@ -134,7 +135,7 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
-                  <Col md={8}>
+                  <Col md={8} style={{ marginTop: 75, marginBottom: 75 }}>
                     <MovieView movies={movies} />
                   </Col>
                 )}
@@ -146,15 +147,14 @@ export const MainView = () => {
             element={
               <>
                 <Row>
-                  <Col md={4}>
-                    <Form className="mt-5">
-                      <Form.Control
-                        id="search-movie"
-                        className="form-control"
-                        type="search"
-                        placeholder="Search movie..."
-                      />
-                    </Form>
+                  <Col md={5} style={{ marginTop: 75 }}>
+                    <Form.Control
+                      id="search-movie"
+                      className="form-control"
+                      onChange={filterMovies}
+                      type="search"
+                      placeholder="Search movie..."
+                    />
                   </Col>
                 </Row>
 
@@ -164,10 +164,14 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    <div md={12} className="container-fluid my-Flix mt-5">
+                    <div
+                      md={12}
+                      className="container-fluid my-Flix"
+                      style={{ marginTop: 75 }}
+                    >
                       <div className="row">
                         <MovieList
-                          movies={movies}
+                          movies={filtered}
                           handleFavoriteClick={addFavoriteMovie}
                           favoriteComponent={AddFavorite}
                         />
@@ -186,40 +190,20 @@ export const MainView = () => {
                   <Navigate to="/login" />
                 ) : (
                   <>
-                    <Col md={8}>
-                      <ProfileView
-                        user={user}
-                        token={token}
-                        onDelete={clearLocalCurrentUser}
-                      />
+                    <Col md={5} style={{ marginTop: 75 }}>
+                      <ProfileView user={user} token={token} />
                     </Col>
-                  </>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/movielist"
-            element={
-              <>
-                {!user ? (
-                  <Navigate to="/login" />
-                ) : (
-                  <>
-                    <div md={12} className="container-fluid my-Flix">
-                      <div className="row">
-                        <MovieList
-                          movies={movies}
-                          handleFavoriteClick={addFavoriteMovie}
-                          favoriteComponent={AddFavorite}
-                        />
+
+                    <div
+                      md={12}
+                      className="container-fluid my-Flix"
+                      style={{ marginTop: 75, marginBottom: 75 }}
+                    >
+                      <div className="row d-flex mb-3">
+                        <h4>Favorites</h4>
                       </div>
 
-                      <div className="row d-flex align-items-center mt-4 mb-4">
-                        <h1>Favorites</h1>
-                      </div>
-
-                      <div className="row">
+                      <div className="row" style={{ marginBottom: 75 }}>
                         <MovieList
                           movies={favorite}
                           handleFavoriteClick={removeFavoriteMovie}
@@ -237,29 +221,3 @@ export const MainView = () => {
     </BrowserRouter>
   );
 };
-
-/*
-
- {searchedMovies && searchedMovies.length > 0 ? (
-                                            searchedMovies.map((movie) =>
-                                                <Col md={4} lg={3} key={movie._id} className="mb-5">
-                                                    <MovieList movie={movie} />
-                                                </Col>
-                                            )
-                                        ) : (
-              {searchedMovies && searchedMovies.length > 0 ? (
-                      searchedMovies.map((props) => (
-                        <div md={12} className="container-fluid my-Flix mt-5">
-                          <div className="row">
-                            <MovieList
-                              movies={movies}
-                              handleFavoriteClick={addFavoriteMovie}
-                              favoriteComponent={AddFavorite}
-                              searchValue={searchValue}
-                              setSearchValue={setSearchValue}
-                            />
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-*/

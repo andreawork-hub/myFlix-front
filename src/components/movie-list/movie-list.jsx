@@ -24,7 +24,7 @@ export const MovieList = (props) => {
             <Card.Title>{movie.title}</Card.Title>
             <Card.Text>{movie.director}</Card.Text>
           </Card.Body>
-          <Card.Footer className="mb-3 justify-content-between">
+          <Card.Footer className="mb-3">
             <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
               <Button variant="danger">Open</Button>
             </Link>
@@ -32,6 +32,10 @@ export const MovieList = (props) => {
             <Button
               variant="danger"
               onClick={() => props.handleFavoriteClick(movie)}
+              style={{
+                alignItems: "flex-end",
+                float: "right",
+              }}
             >
               <FavoriteComponent />
             </Button>
