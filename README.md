@@ -10,7 +10,7 @@
 
 📖 [myFlix React app]
 -----
-[myFlix React app] is A single-page, responsive app with routing, rich interactions, several interface views, and a polished user experience. The client-side developed in this Achievement will support the existing server-side by facilitating user requests and rendering the response from the server-side via a number of different interface views.
+[myFlix React app] built the client-side of the myFlix app, includes several interface views (using the React library) that handle data through the (previously defined) REST API endpoints.
 
 🛠 Built With
 -----
