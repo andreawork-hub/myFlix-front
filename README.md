@@ -79,3 +79,7 @@ Contributions, issues, and feature requests are welcome!
 
 Feel free to check the issues page.
 
+🙏 Acknowledgments
+-----
+I would like to thank to Stephen Barungi and Bless Darah, who helped me to complete the project in terms of my studies at CF successfully.
+
